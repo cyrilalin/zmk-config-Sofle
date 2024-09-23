@@ -48,23 +48,11 @@
             hold-while-undecided;
         };
 
-        spc_ent: spc_ent {
-            compatible = "zmk,behavior-mod-morph";
-            label = "SPC_ENT";
-            bindings = <&kp SPACE>, <&kp ENTER>;
-
+        sticky_shift_caps_word: sticky_shift_caps_word {
+            compatible = "zmk,behavior-tap-dance";
+            label = "STICKY_SHIFT_CAPS_WORD";
             #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        ctr_spc_ent: ctr_spc_ent {
-            compatible = "zmk,behavior-hold-tap";
-            label = "CTR_SPC_ENT";
-            bindings = <&kp>, <&spc_ent>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            flavor = "tap-preferred";
+            bindings = <&sk LEFT_SHIFT>, <&caps_word>, <&kp CAPSLOCK>;
         };
     };
 
@@ -82,11 +70,11 @@
             //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&kp GRAVE     &kp N1  &kp N2  &kp N3  &kp N4        &kp N5                                          &kp N6                       &kp N7      &kp N8     &kp N9   &kp N0    &kp LC(LA(DELETE))
-&gresc        &kp Q   &kp W   &kp E   &kp R         &kp T                                           &kp Y                        &kp U       &kp I      &kp O    &kp P     &kp LC(BSPC)
-&kp LEFT_GUI  &kp A   &kp S   &kp D   &kp F         &kp G                                           &kp H                        &kp J       &kp K      &kp L    &kp SEMI  &kp SQT
-&kp LEFT_ALT  &kp Z   &kp X   &kp C   &kp V         &kp B           &kp C_MUTE    &none             &kp N                        &kp M       &kp COMMA  &kp DOT  &kp FSLH  &kp DELETE
-                      &none   &none   &kp LEFT_GUI  &sk LEFT_SHIFT  &lt 1 TAB     &lt_bspc_del 2 0  &ctr_spc_ent LEFT_CONTROL 0  &kp RETURN  &none      &none
+&kp GRAVE     &kp N1  &kp N2  &kp N3  &kp N4      &kp N5                                                   &kp N6                  &kp N7      &kp N8     &kp N9   &kp N0    &kp LC(LA(DELETE))
+&gresc        &kp Q   &kp W   &kp E   &kp R       &kp T                                                    &kp Y                   &kp U       &kp I      &kp O    &kp P     &kp LC(BSPC)
+&kp LEFT_GUI  &kp A   &kp S   &kp D   &kp F       &kp G                                                    &kp H                   &kp J       &kp K      &kp L    &kp SEMI  &kp SQT
+&kp LEFT_ALT  &kp Z   &kp X   &kp C   &kp V       &kp B                    &kp C_MUTE    &kp LG(LS(S))     &kp N                   &kp M       &kp COMMA  &kp DOT  &kp FSLH  &kp DELETE
+                      &none   &none   &kp ESCAPE  &sticky_shift_caps_word  &lt 1 TAB     &lt_bspc_del 2 0  &mt LEFT_CONTROL SPACE  &kp RETURN  &none      &none
             >;
 
             sensor-bindings =
@@ -127,11 +115,11 @@
             //                |      |       |       |      |      |  |      |      |      |       |      |
 
             bindings = <
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &trans     &trans    &trans    &trans     &trans  &trans
-&trans      &kp INS       &kp PSCRN     &kp K_CMENU   &trans        &trans                          &kp PG_UP  &trans    &kp UP    &trans     &none   &trans
-&trans      &kp LALT      &kp LCTRL     &kp LSHFT     &trans        &kp CLCK                        &kp PG_DN  &kp LEFT  &kp DOWN  &kp RIGHT  &none   &none
-&trans      &kp K_UNDO    &kp K_CUT     &kp K_COPY    &kp K_PASTE   &trans        &trans    &trans  &trans     &trans    &trans    &trans     &trans  &trans
-                          &trans        &trans        &trans        &trans        &trans    &trans  &trans     &trans    &trans    &trans
+&none   &none       &none      &none        &none        &none                       &trans     &trans    &trans    &trans     &trans  &trans
+&trans  &kp INS     &kp PSCRN  &kp K_CMENU  &trans       &trans                      &kp PG_UP  &trans    &kp UP    &trans     &none   &trans
+&trans  &kp LALT    &kp LCTRL  &kp LSHFT    &trans       &kp CLCK                    &kp PG_DN  &kp LEFT  &kp DOWN  &kp RIGHT  &none   &none
+&trans  &kp K_UNDO  &kp K_CUT  &kp K_COPY   &kp K_PASTE  &trans    &trans    &trans  &trans     &trans    &trans    &trans     &trans  &trans
+                    &trans     &trans       &trans       &trans    &trans    &trans  &trans     &trans    &trans    &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
