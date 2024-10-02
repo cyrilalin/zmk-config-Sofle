@@ -48,11 +48,34 @@
             quick-tap-ms = <200>;
         };
 
-        sticky_shift_caps_word: sticky_shift_caps_word {
+        shift_word_lock: shift_word_lock {
             compatible = "zmk,behavior-tap-dance";
-            label = "STICKY_SHIFT_CAPS_WORD";
+            label = "SHIFT_WORD_LOCK";
             #binding-cells = <0>;
-            bindings = <&sk LEFT_SHIFT>, <&caps_word>, <&kp CAPSLOCK>;
+            bindings = <&kp LEFT_SHIFT>, <&caps_word>, <&kp CAPSLOCK>;
+        };
+
+        forward_back_slash: forward_back_slash {
+            compatible = "zmk,behavior-tap-dance";
+            label = "FORWARD_BACK_SLASH";
+            #binding-cells = <0>;
+            bindings = <&kp FSLH>, <&kp BACKSLASH>;
+
+            tapping-term-ms = <200>;
+        };
+
+        l_bracket_brace: l_bracket_brace {
+            compatible = "zmk,behavior-tap-dance";
+            label = "L_BRACKET_BRACE";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_BRACKET>, <&kp LEFT_BRACE>;
+        };
+
+        r_bracket_brace: r_bracket_brace {
+            compatible = "zmk,behavior-tap-dance";
+            label = "R_BRACKET_BRACE";
+            #binding-cells = <0>;
+            bindings = <&kp RIGHT_BRACKET>, <&kp RIGHT_BRACE>;
         };
     };
 
@@ -70,11 +93,11 @@
             //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&kp GRAVE     &kp N1  &kp N2  &kp N3  &kp N4            &kp N5                                                   &kp N6     &kp N7      &kp N8     &kp N9   &kp N0    &kp LC(LA(DELETE))
-&gresc        &kp Q   &kp W   &kp E   &kp R             &kp T                                                    &kp Y      &kp U       &kp I      &kp O    &kp P     &kp LC(BSPC)
-&sk LEFT_GUI  &kp A   &kp S   &kp D   &kp F             &kp G                                                    &kp H      &kp J       &kp K      &kp L    &kp SEMI  &kp SQT
-&sk LEFT_ALT  &kp Z   &kp X   &kp C   &kp V             &kp B                    &kp C_MUTE    &kp LG(LS(S))     &kp N      &kp M       &kp COMMA  &kp DOT  &kp FSLH  &kp DELETE
-                      &none   &none   &sk LEFT_CONTROL  &sticky_shift_caps_word  &lt 1 TAB     &lt_bspc_del 2 0  &kp SPACE  &kp RETURN  &none      &none
+&kp GRAVE     &kp N1  &kp N2  &kp N3  &kp N4            &kp N5                                            &kp N6     &kp N7      &kp N8     &kp N9   &kp N0               &kp LC(LA(DELETE))
+&gresc        &kp Q   &kp W   &kp E   &kp R             &kp T                                             &kp Y      &kp U       &kp I      &kp O    &kp P                &kp LC(BSPC)
+&kp LEFT_GUI  &kp A   &kp S   &kp D   &kp F             &kp G                                             &kp H      &kp J       &kp K      &kp L    &kp SEMI             &kp SQT
+&kp LEFT_ALT  &kp Z   &kp X   &kp C   &kp V             &kp B             &kp C_MUTE    &kp LG(LS(S))     &kp N      &kp M       &kp COMMA  &kp DOT  &forward_back_slash  &kp DELETE
+                      &none   &none   &kp LEFT_CONTROL  &shift_word_lock  &lt 1 TAB     &lt_bspc_del 2 0  &kp SPACE  &kp RETURN  &none      &none
             >;
 
             sensor-bindings =
@@ -94,11 +117,11 @@
             //               |     |      |      |      |        |  |       |      |       |       |      |
 
             bindings = <
-&none  &none         &none         &none         &none         &none                           &none         &none         &none           &none                 &none                  &none
-&none  &kp EXCL      &kp AT        &kp HASH      &kp DOLLAR    &kp PERCENT                     &kp CARET     &kp AMPS      &kp ASTRK       &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &none
-&none  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5                    &kp NUMBER_6  &kp NUMBER_7  &kp NUMBER_8    &kp NUMBER_9          &kp NUMBER_0           &none
-&none  &kp EQUAL     &kp PLUS      &kp MINUS     &kp UNDER     &kp TILDE     &trans    &trans  &kp LBKT      &kp RBKT      &kp LEFT_BRACE  &kp RIGHT_BRACE       &kp BSLH               &none
-                     &trans        &trans        &trans        &trans        &trans    &trans  &trans        &trans        &trans          &trans
+&none  &none         &none         &none         &none         &none                           &none             &none             &none         &none                 &none                  &none
+&none  &kp EXCL      &kp AT        &kp HASH      &kp DOLLAR    &kp PERCENT                     &kp CARET         &kp AMPS          &kp ASTRK     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &none
+&none  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5                    &kp NUMBER_6      &kp NUMBER_7      &kp NUMBER_8  &kp NUMBER_9          &kp NUMBER_0           &none
+&none  &kp EQUAL     &kp PLUS      &kp MINUS     &kp UNDER     &kp TILDE     &trans    &trans  &l_bracket_brace  &r_bracket_brace  &kp COMMA     &kp PERIOD            &kp SLASH              &none
+                     &trans        &trans        &trans        &trans        &trans    &trans  &trans            &trans            &trans        &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -137,8 +160,8 @@
             bindings = <
 &bootloader     &none         &none         &none         &none         &none                         &bootloader  &none   &none   &none   &none  &none
 &none           &none         &none         &none         &none         &none                         &none        &none   &none   &none   &none  &none
-&bt BT_CLR_ALL  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR                    &none        &none   &none   &none   &none  &none
-&none           &none         &none         &none         &none         &none       &trans    &trans  &none        &none   &none   &none   &none  &none
+&none           &none         &none         &none         &none         &none                         &none        &none   &none   &none   &none  &none
+&bt BT_CLR_ALL  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR  &trans    &trans  &none        &none   &none   &none   &none  &none
                               &trans        &trans        &none         &trans      &trans    &trans  &trans       &trans  &trans  &trans
             >;
         };
