@@ -143,11 +143,11 @@
             //                |      |       |       |      |      |  |      |      |      |       |      |
 
             bindings = <
-&none   &none   &none    &none    &none    &none                         &hold_bootloader 0 0  &none            &none             &none        &none              &none
-&none   &kp F1  &kp F2   &kp F3   &kp F4   &bt BT_NXT                    &kp HOME              &kp LS(LC(TAB))  &kp UP_ARROW      &kp LC(TAB)  &kp C_VOLUME_UP    &none
-&trans  &kp F5  &kp F6   &kp F7   &kp F8   &bt BT_PRV                    &kp INSERT            &kp LEFT         &kp DOWN          &kp RIGHT    &kp C_VOLUME_DOWN  &none
-&trans  &kp F9  &kp F10  &kp F11  &kp F12  &bt BT_CLR  &trans    &trans  &kp END               &kp C_PREVIOUS   &kp C_PLAY_PAUSE  &kp C_NEXT   &kp C_MUTE         &none
-                &trans   &trans   &trans   &trans      &trans    &trans  &trans                &trans           &trans            &trans
+&none   &none   &none    &none    &none    &none                         &none       &none            &none             &none        &none              &hold_bootloader 0 0
+&none   &kp F1  &kp F2   &kp F3   &kp F4   &bt BT_NXT                    &kp HOME    &kp LS(LC(TAB))  &kp UP_ARROW      &kp LC(TAB)  &kp C_VOLUME_UP    &none
+&trans  &kp F5  &kp F6   &kp F7   &kp F8   &bt BT_PRV                    &kp INSERT  &kp LEFT         &kp DOWN          &kp RIGHT    &kp C_VOLUME_DOWN  &none
+&trans  &kp F9  &kp F10  &kp F11  &kp F12  &bt BT_CLR  &trans    &trans  &kp END     &kp C_PREVIOUS   &kp C_PLAY_PAUSE  &kp C_NEXT   &kp C_MUTE         &none
+                &trans   &trans   &trans   &trans      &trans    &trans  &trans      &trans           &trans            &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
